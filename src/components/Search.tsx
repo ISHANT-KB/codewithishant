@@ -27,14 +27,14 @@ export default function Search({ posts }: { posts: Post[] }) {
 
   return (
 
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto ">
 
       <input
         type="text"
         placeholder="Search articles..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full border p-2 rounded"
+        className="w-full border p-2 rounded-4xl"
       />
 
       {query && (
