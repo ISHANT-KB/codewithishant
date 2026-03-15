@@ -1,0 +1,57 @@
+Directory structure:
+└── ishant-kb-codewithishant/
+    ├── README.md
+    ├── eslint.config.mjs
+    ├── next.config.ts
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── tsconfig.json
+    └── src/
+        ├── app/
+        │   ├── globals.css
+        │   ├── layout.tsx
+        │   ├── page.tsx
+        │   ├── about/
+        │   │   └── page.tsx
+        │   ├── blog/
+        │   │   ├── layout.tsx
+        │   │   ├── page.tsx
+        │   │   └── [category]/
+        │   │       ├── page.tsx
+        │   │       └── [slug]/
+        │   │           └── page.tsx
+        │   ├── contact/
+        │   │   └── page.tsx
+        │   ├── notes/
+        │   │   └── page.tsx
+        │   ├── search/
+        │   │   └── page.tsx
+        │   └── tags/
+        │       └── [tags]/
+        │           └── page.tsx
+        ├── components/
+        │   ├── Breadcrumbs.tsx
+        │   ├── CodeBlock.tsx
+        │   ├── mdx-components.tsx
+        │   ├── Navbar.tsx
+        │   ├── Search.tsx
+        │   ├── Sidebar.tsx
+        │   └── TableOfContents.tsx
+        ├── content/
+        │   └── blog/
+        │       ├── cpp/
+        │       │   └── cpp-intro.mdx
+        │       ├── javascript/
+        │       │   └── js-intro.mdx
+        │       └── python/
+        │           ├── conditional-statement.mdx
+        │           ├── oops.mdx
+        │           └── python-loops.mdx
+        └── lib/
+            ├── getAllPosts.ts
+            ├── getAllTags.ts
+            ├── getPost.ts
+            ├── getPostsByCategory.ts
+            ├── getRelatedPosts.ts
+            ├── getSidebar.ts
+            └── getTableOfContents.ts
