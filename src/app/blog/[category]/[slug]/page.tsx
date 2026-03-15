@@ -5,6 +5,7 @@ import TableOfContents from "@/components/TableOfContents";
 import { getRelatedPosts } from "@/lib/getRelatedPosts";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { getAdjacentPosts } from "@/lib/getAdjacentPosts";
 
 type PageProps = {
   params: Promise<{
@@ -20,6 +21,7 @@ export default async function BlogPost({ params }: PageProps) {
 
   const related = getRelatedPosts(metadata.tags ?? [], slug);
 
+  const { prev, next } = getAdjacentPosts(category, slug);
   return (
     <div className="flex justify-between max-w-6xl mx-auto gap-10">
       {/* Article */}
@@ -69,6 +71,28 @@ export default async function BlogPost({ params }: PageProps) {
             </ul>
           </div>
         )}
+
+        <div className="mt-12 border-t pt-6 flex justify-between">
+          {prev ? (
+            <Link
+              href={`/blog/${prev.category}/${prev.slug}`}
+              className="text-blue-600"
+            >
+              ← {prev.title}
+            </Link>
+          ) : (
+            <div />
+          )}
+
+          {next ? (
+            <Link
+              href={`/blog/${next.category}/${next.slug}`}
+              className="text-blue-600"
+            >
+              {next.title} →
+            </Link>
+          ) : null}
+        </div>
       </article>
 
       {/* Table of contents */}

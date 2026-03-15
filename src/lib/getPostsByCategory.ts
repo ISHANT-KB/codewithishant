@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import matter from "gray-matter"
 
 export function getPostsByCategory(category: string) {
 
@@ -9,16 +10,24 @@ export function getPostsByCategory(category: string) {
     category
   )
 
-  if (!fs.existsSync(categoryPath)) {
-    return []
-  }
-
   const files = fs.readdirSync(categoryPath)
 
   const posts = files.map((file) => {
+
+    const slug = file.replace(".mdx", "")
+
+    const filePath = path.join(categoryPath, file)
+
+    const fileContent = fs.readFileSync(filePath, "utf-8")
+
+    const { data } = matter(fileContent)
+
     return {
-      slug: file.replace(".mdx", ""),
-      category
+      slug,
+      category,
+      title: data.title,
+      description: data.description,
+      tags: data.tags ?? []
     }
   })
 
