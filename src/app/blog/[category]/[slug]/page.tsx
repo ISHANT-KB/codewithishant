@@ -28,15 +28,17 @@ export default async function BlogPost({ params }: PageProps) {
 
       <article className="max-w-3xl">
         <Breadcrumbs category={category} title={metadata.title} />
-
         <h1 className="text-4xl font-bold">{metadata.title}</h1>
-
-        <p className="text-gray-500 mt-2">{metadata.description}</p>
-
-        <p className="text-sm text-gray-400 mb-8">{readingTime}</p>
-
+        {metadata.author} •{" "}
+        {new Date(metadata.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}{" "}
+        • {readingTime} • {metadata.difficulty}
+        <p className="text-gray-500 mt-2 mb-5">{metadata.description}</p>
+        
         <MDXRemote source={content} components={mdxComponents} />
-
         {/* tags */}
         <div className="flex gap-2 mb-6 mt-12">
           {metadata.tags?.map((tag: string) => (
@@ -49,7 +51,6 @@ export default async function BlogPost({ params }: PageProps) {
             </a>
           ))}
         </div>
-
         {/* related articles */}
         {related.length > 0 && (
           <div className="mt-5 border-t pt-6">
@@ -71,7 +72,6 @@ export default async function BlogPost({ params }: PageProps) {
             </ul>
           </div>
         )}
-
         <div className="mt-12 border-t pt-6 flex justify-between">
           {prev ? (
             <Link

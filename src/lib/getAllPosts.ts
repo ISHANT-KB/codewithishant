@@ -8,9 +8,12 @@ interface Post {
   tags: string[]
   category: string
   slug: string
+  date: string
+  difficulty: string
+  featured?: boolean
 }
 
-export function getAllPosts() {
+export function getAllPosts(): Post[] {
 
   const blogDir = path.join(process.cwd(), "src/content/blog")
 
@@ -39,13 +42,22 @@ export function getAllPosts() {
         description: data.description,
         tags: data.tags ?? [],
         category,
-        slug
+        slug,
+        date: data.date ?? "",
+        difficulty: data.difficulty ?? "",
+        featured: data.featured ?? false
       })
 
     })
 
   })
 
-  return posts
+  // sort newest first
+  posts.sort(
+    (a, b) =>
+      new Date(b.date).getTime() -
+      new Date(a.date).getTime()
+  )
 
+  return posts
 }
