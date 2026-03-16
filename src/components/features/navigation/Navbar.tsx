@@ -9,9 +9,10 @@ export default function Navbar() {
         <Link href="/">Home</Link>
         <Link href="/blog">Blog</Link>
         <Link href="/notes">Notes</Link>
-        <Link href="/about">About</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/search">Search</Link>
+        <Link href="/explore">Explore</Link>
+        <Link href="/about">About</Link>
       </div>
     </nav>
   );

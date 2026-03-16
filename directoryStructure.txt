@@ -1,16 +1,20 @@
 Directory structure:
 └── ishant-kb-codewithishant/
     ├── README.md
+    ├── directoryStructure.txt
     ├── eslint.config.mjs
+    ├── futureUpdate.txt
     ├── next.config.ts
     ├── package.json
     ├── postcss.config.mjs
     ├── tsconfig.json
+    ├── websiteStatus.txt
     └── src/
         ├── app/
         │   ├── globals.css
         │   ├── layout.tsx
         │   ├── page.tsx
+        │   ├── sitemap.ts
         │   ├── about/
         │   │   └── page.tsx
         │   ├── blog/
@@ -22,21 +26,35 @@ Directory structure:
         │   │           └── page.tsx
         │   ├── contact/
         │   │   └── page.tsx
-        │   ├── notes/
+        │   ├── explore/
         │   │   └── page.tsx
+        │   ├── notes/
+        │   │   ├── layout.tsx
+        │   │   ├── page.tsx
+        │   │   └── [category]/
+        │   │       ├── page.tsx
+        │   │       └── [slug]/
+        │   │           └── page.tsx
         │   ├── search/
         │   │   └── page.tsx
         │   └── tags/
         │       └── [tags]/
         │           └── page.tsx
         ├── components/
-        │   ├── Breadcrumbs.tsx
-        │   ├── CodeBlock.tsx
-        │   ├── mdx-components.tsx
-        │   ├── Navbar.tsx
-        │   ├── Search.tsx
-        │   ├── Sidebar.tsx
-        │   └── TableOfContents.tsx
+        │   ├── features/
+        │   │   ├── article/
+        │   │   │   ├── CodeBlock.tsx
+        │   │   │   ├── mdx-components.tsx
+        │   │   │   └── TableOfContents.tsx
+        │   │   ├── navigation/
+        │   │   │   ├── Breadcrumbs.tsx
+        │   │   │   ├── Navbar.tsx
+        │   │   │   └── Sidebar.tsx
+        │   │   └── search/
+        │   │       ├── CommandPalette.tsx
+        │   │       └── Search.tsx
+        │   └── ui/
+        │       └── CopyButton.tsx
         ├── content/
         │   └── blog/
         │       ├── cpp/
@@ -47,11 +65,25 @@ Directory structure:
         │           ├── conditional-statement.mdx
         │           ├── oops.mdx
         │           └── python-loops.mdx
-        └── lib/
-            ├── getAllPosts.ts
-            ├── getAllTags.ts
-            ├── getPost.ts
-            ├── getPostsByCategory.ts
-            ├── getRelatedPosts.ts
-            ├── getSidebar.ts
-            └── getTableOfContents.ts
+        ├── lib/
+        │   ├── blog/
+        │   │   ├── getAdjacentPosts.ts
+        │   │   ├── getAllPosts.ts
+        │   │   ├── getPost.ts
+        │   │   ├── getPostsByCategory.ts
+        │   │   ├── getRelatedPosts.ts
+        │   │   └── getSeriesPosts.ts
+        │   ├── content/
+        │   │   ├── getAllTags.ts
+        │   │   ├── getReadingTime.ts
+        │   │   └── getTableOfContents.ts
+        │   ├── navigation/
+        │   │   └── getSidebar.ts
+        │   └── notes/
+        │       ├── getAdjacentNotes.ts
+        │       ├── getAllNotes.ts
+        │       ├── getNote.ts
+        │       ├── getNotesByCategory.ts
+        │       └── getRelatedNotes.ts
+        └── types/
+            └── content.ts
