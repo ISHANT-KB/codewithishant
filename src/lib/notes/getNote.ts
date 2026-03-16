@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
-import { getTableOfContents } from "./getTableOfContents";
+import { getTableOfContents } from "../content/getTableOfContents";
 
 export function getNote(category: string, slug: string) {
   const filePath = path.join(

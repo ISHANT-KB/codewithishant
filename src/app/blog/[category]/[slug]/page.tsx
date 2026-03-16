@@ -1,11 +1,11 @@
-import { getPost } from "@/lib/getPost";
+import { getPost } from "@/lib/blog/getPost";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { mdxComponents } from "@/components/mdx-components";
-import TableOfContents from "@/components/TableOfContents";
-import { getRelatedPosts } from "@/lib/getRelatedPosts";
+import { mdxComponents } from "@/components/features/article/mdx-components";
+import TableOfContents from "@/components/features/article/TableOfContents";
+import { getRelatedPosts } from "@/lib/blog/getRelatedPosts";
 import Link from "next/link";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { getAdjacentPosts } from "@/lib/getAdjacentPosts";
+import Breadcrumbs from "@/components/features/navigation/Breadcrumbs";
+import { getAdjacentPosts } from "@/lib/blog/getAdjacentPosts";
 
 type PageProps = {
   params: Promise<{
@@ -37,7 +37,6 @@ export default async function BlogPost({ params }: PageProps) {
         })}{" "}
         • {readingTime} • {metadata.difficulty}
         <p className="text-gray-500 mt-2 mb-5">{metadata.description}</p>
-        
         <MDXRemote source={content} components={mdxComponents} />
         {/* tags */}
         <div className="flex gap-2 mb-6 mt-12">

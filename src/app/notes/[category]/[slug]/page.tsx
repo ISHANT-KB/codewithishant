@@ -1,11 +1,11 @@
-import { getNote } from "@/lib/getNote";
+import { getNote } from "@/lib/notes/getNote";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { mdxComponents } from "@/components/mdx-components";
-import TableOfContents from "@/components/TableOfContents";
-import { getRelatedNotes } from "@/lib/getRelatedNotes";
+import { mdxComponents } from "@/components/features/article/mdx-components";
+import TableOfContents from "@/components/features/article/TableOfContents";
+import { getRelatedNotes } from "@/lib/notes/getRelatedNotes";
 import Link from "next/link";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { getAdjacentNotes } from "@/lib/getAdjacentNotes";
+import Breadcrumbs from "@/components/features/navigation/Breadcrumbs";
+import { getAdjacentNotes } from "@/lib/notes/getAdjacentNotes";
 
 type PageProps = {
   params: Promise<{

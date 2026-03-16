@@ -1,53 +1,59 @@
-import { getAllTags } from "@/lib/getAllTags"
-import Link from "next/link"
+import { getAllTags } from "@/lib/content/getAllTags";
+import { getAllPosts } from "@/lib/blog/getAllPosts";
+import { getAllNotes } from "@/lib/notes/getAllNotes";
+import Link from "next/link";
 
 type PageProps = {
-  params: Promise<{ tags: string }>
-}
+  params: Promise<{ tags: string }>;
+};
 
 export default async function TagPage({ params }: PageProps) {
+  const { tags: tag } = await params;
 
-  const { tags: tag } = await params
-
-  const allTags = getAllTags()
-
-  const posts = allTags[tag] || []
+  const posts = getAllPosts().filter((post) => post.tags.includes(tag));
+  const notes = getAllNotes().filter((note) => note.tags.includes(tag));
 
   return (
-
     <div className="max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Tag: {tag}</h1>
 
-      <h1 className="text-3xl font-bold mb-6">
-        Tag: {tag}
-      </h1>
+      <div className="space-y-6">
+        {posts.length > 0 && (
+          <section>
+            <h2 className="text-2xl font-semibold mb-3">Blog Posts</h2>
+            <ul className="space-y-3">
+              {posts.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.category}/${post.slug}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {post.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
-      <ul className="space-y-3">
-
-        {posts.map((post) => {
-
-          const [category, slug] = post.split("/")
-
-          return (
-
-            <li key={post}>
-
-              <Link
-                href={`/blog/${category}/${slug}`}
-                className="text-blue-600"
-              >
-                {slug}
-              </Link>
-
-            </li>
-
-          )
-
-        })}
-
-      </ul>
-
+        {notes.length > 0 && (
+          <section>
+            <h2 className="text-2xl font-semibold mb-3">Notes</h2>
+            <ul className="space-y-3">
+              {notes.map((note) => (
+                <li key={note.slug}>
+                  <Link
+                    href={`/notes/${note.category}/${note.slug}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {note.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
     </div>
-
-  )
-
+  );
 }

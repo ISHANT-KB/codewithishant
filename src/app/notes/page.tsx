@@ -1,5 +1,5 @@
-import Search from "@/components/Search";
-import { getAllNotes } from "@/lib/getAllNotes";
+import Search from "@/components/features/search/Search";
+import { getAllNotes } from "@/lib/notes/getAllNotes";
 import Link from "next/link";
 
 export default function NotePage() {

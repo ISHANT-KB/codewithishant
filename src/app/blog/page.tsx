@@ -1,5 +1,5 @@
-import Search from "@/components/Search";
-import { getAllPosts } from "@/lib/getAllPosts";
+import Search from "@/components/features/search/Search";
+import { getAllPosts } from "@/lib/blog/getAllPosts";
 import Link from "next/link";
 
 export default function BlogPage() {

@@ -1,4 +1,4 @@
-import { getNotesByCategory } from "@/lib/getNotesByCategory";
+import { getNotesByCategory } from "@/lib/notes/getNotesByCategory";
 import Link from "next/link";
 
 type PageProps = {
