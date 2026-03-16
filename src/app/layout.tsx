@@ -15,7 +15,7 @@ export default function RootLayout({
       <body>
         <Navbar />
 
-        <main className="max-w-7xl p-5">{children}</main>
+        <main className="max-w-7xl mx-auto p-5">{children}</main>
 
         <CommandPalette posts={posts} />
       </body>
