@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Fuse from "fuse.js"
-import Link from "next/link"
+import { useState } from "react";
+import Fuse from "fuse.js";
+import Link from "next/link";
 
 type Post = {
-  title: string
-  description: string
-  slug: string
-  category: string
-  tags: string[]
-}
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  tags: string[];
+};
 
-export default function Search({ posts }: { posts: Post[] }) {
+type SearchProps = {
+  posts: Post[];
+  basePath?: string;
+};
 
-  const [query, setQuery] = useState("")
+export default function Search({ posts, basePath = "/blog" }: SearchProps) {
+  const [query, setQuery] = useState("");
 
   const fuse = new Fuse(posts, {
     keys: ["title", "description", "tags"],
     threshold: 0.3,
-  })
+  });
 
-  const results = query
-    ? fuse.search(query).map((r) => r.item)
-    : []
+  const results = query ? fuse.search(query).map((r) => r.item) : [];
 
   return (
-
     <div className="max-w-xl mx-auto ">
-
       <input
         type="text"
         placeholder="Search articles..."
@@ -39,26 +39,18 @@ export default function Search({ posts }: { posts: Post[] }) {
 
       {query && (
         <ul className="mt-4 space-y-2">
-
           {results.map((post) => (
-
             <li key={post.slug}>
-
               <Link
-                href={`/blog/${post.category}/${post.slug}`}
+                href={`${basePath}/${post.category}/${post.slug}`}
                 className="text-blue-600"
               >
                 {post.title}
               </Link>
-
             </li>
-
           ))}
-
         </ul>
       )}
-
     </div>
-
-  )
+  );
 }
