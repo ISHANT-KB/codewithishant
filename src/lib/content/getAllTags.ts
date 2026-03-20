@@ -10,7 +10,9 @@ export function getAllTags(): Tag[] {
   const tags: Record<string, string[]> = {};
 
   // Process blog posts
-  const blogCategories = fs.readdirSync(blogDir);
+  const blogCategories = fs
+    .readdirSync(blogDir)
+    .filter((entry) => fs.statSync(path.join(blogDir, entry)).isDirectory());
   blogCategories.forEach((category) => {
     const categoryPath = path.join(blogDir, category);
     const files = fs.readdirSync(categoryPath);
@@ -29,23 +31,27 @@ export function getAllTags(): Tag[] {
   });
 
   // Process notes
-  const notesCategories = fs.readdirSync(notesDir);
-  notesCategories.forEach((category) => {
-    const categoryPath = path.join(notesDir, category);
-    const files = fs.readdirSync(categoryPath);
-    files.forEach((file) => {
-      const filePath = path.join(categoryPath, file);
-      const source = fs.readFileSync(filePath, "utf8");
-      const { data } = matter(source);
-      const slug = file.replace(".mdx", "");
-      if (data.tags) {
-        data.tags.forEach((tag: string) => {
-          if (!tags[tag]) tags[tag] = [];
-          tags[tag].push(`${category}/${slug}`);
-        });
-      }
+  if (fs.existsSync(notesDir)) {
+    const notesCategories = fs
+      .readdirSync(notesDir)
+      .filter((entry) => fs.statSync(path.join(notesDir, entry)).isDirectory());
+    notesCategories.forEach((category) => {
+      const categoryPath = path.join(notesDir, category);
+      const files = fs.readdirSync(categoryPath);
+      files.forEach((file) => {
+        const filePath = path.join(categoryPath, file);
+        const source = fs.readFileSync(filePath, "utf8");
+        const { data } = matter(source);
+        const slug = file.replace(".mdx", "");
+        if (data.tags) {
+          data.tags.forEach((tag: string) => {
+            if (!tags[tag]) tags[tag] = [];
+            tags[tag].push(`${category}/${slug}`);
+          });
+        }
+      });
     });
-  });
+  }
 
   return Object.entries(tags)
     .map(([name, posts]) => ({

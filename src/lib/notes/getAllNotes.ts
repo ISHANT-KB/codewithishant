@@ -6,7 +6,14 @@ import { Note } from "@/types/content";
 export function getAllNotes(): Note[] {
   const noteDir = path.join(process.cwd(), "src/content/notes");
 
-  const categories = fs.readdirSync(noteDir);
+  // Check if notes directory exists
+  if (!fs.existsSync(noteDir)) {
+    return [];
+  }
+
+  const categories = fs
+    .readdirSync(noteDir)
+    .filter((entry) => fs.statSync(path.join(noteDir, entry)).isDirectory());
 
   const notes: Note[] = [];
 

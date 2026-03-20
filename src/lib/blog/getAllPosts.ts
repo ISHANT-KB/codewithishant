@@ -6,7 +6,13 @@ import { Post } from "@/types/content";
 export function getAllPosts(): Post[] {
   const blogDir = path.join(process.cwd(), "src/content/blog");
 
-  const categories = fs.readdirSync(blogDir);
+  if (!fs.existsSync(blogDir)) {
+    return [];
+  }
+
+  const categories = fs
+    .readdirSync(blogDir)
+    .filter((entry) => fs.statSync(path.join(blogDir, entry)).isDirectory());
 
   const posts: Post[] = [];
 
