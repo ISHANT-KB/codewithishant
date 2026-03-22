@@ -6,6 +6,7 @@ import { getRelatedPosts } from "@/lib/blog/getRelatedPosts";
 import Link from "next/link";
 import Breadcrumbs from "@/components/features/navigation/Breadcrumbs";
 import { getAdjacentPosts } from "@/lib/blog/getAdjacentPosts";
+import { Metadata } from "next";
 
 type PageProps = {
   params: Promise<{
@@ -13,6 +14,42 @@ type PageProps = {
     slug: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { category, slug } = await params;
+  const { metadata } = await getPost(category, slug);
+
+  return {
+    title: `${metadata.title} | Code with Ishant`,
+    description: metadata.description,
+    keywords: metadata.tags,
+    openGraph: {
+      title: metadata.title,
+      description: metadata.description,
+      url: `https://codewithishant.vercel.app/blog/${category}/${slug}`,
+      type: "article",
+      publishedTime: metadata.date,
+      authors: [metadata.author],
+      tags: metadata.tags,
+      images: [
+        {
+          url: `https://codewithishant.vercel.app/og-image.jpg`, // Or generate dynamic OG image
+          width: 1200,
+          height: 630,
+          alt: metadata.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metadata.title,
+      description: metadata.description,
+      images: [`https://codewithishant.vercel.app/og-image.jpg`],
+    },
+  };
+}
 
 export default async function BlogPost({ params }: PageProps) {
   const { category, slug } = await params;
@@ -27,6 +64,35 @@ export default async function BlogPost({ params }: PageProps) {
       {/* Article */}
 
       <article className="max-w-3xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: metadata.title,
+              description: metadata.description,
+              author: {
+                "@type": "Person",
+                name: metadata.author,
+              },
+              datePublished: metadata.date,
+              dateModified: metadata.date,
+              publisher: {
+                "@type": "Organization",
+                name: "Code with Ishant",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://codewithishant.vercel.app/logo.png", // Add your logo URL
+                },
+              },
+              url: `https://codewithishant.vercel.app/blog/${category}/${slug}`,
+              keywords: metadata.tags?.join(", "),
+              articleSection: category,
+              wordCount: readingTime.split(" ")[0], // Approximate
+            }),
+          }}
+        />
         <Breadcrumbs category={category} title={metadata.title} />
         <h1 className="text-4xl font-bold">{metadata.title}</h1>
         {metadata.author} •{" "}

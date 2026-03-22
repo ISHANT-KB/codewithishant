@@ -6,6 +6,7 @@ import { getRelatedNotes } from "@/lib/notes/getRelatedNotes";
 import Link from "next/link";
 import Breadcrumbs from "@/components/features/navigation/Breadcrumbs";
 import { getAdjacentNotes } from "@/lib/notes/getAdjacentNotes";
+import { Metadata } from "next";
 
 type PageProps = {
   params: Promise<{
@@ -13,6 +14,42 @@ type PageProps = {
     slug: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { category, slug } = await params;
+  const { metadata } = await getNote(category, slug);
+
+  return {
+    title: `${metadata.title} | Code with Ishant`,
+    description: metadata.description,
+    keywords: metadata.tags,
+    openGraph: {
+      title: metadata.title,
+      description: metadata.description,
+      url: `https://codewithishant.vercel.app/notes/${category}/${slug}`,
+      type: "article",
+      publishedTime: metadata.date,
+      authors: [metadata.author],
+      tags: metadata.tags,
+      images: [
+        {
+          url: `https://codewithishant.vercel.app/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: metadata.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metadata.title,
+      description: metadata.description,
+      images: [`https://codewithishant.vercel.app/og-image.jpg`],
+    },
+  };
+}
 
 export default async function NotePost({ params }: PageProps) {
   const { category, slug } = await params;
@@ -27,6 +64,35 @@ export default async function NotePost({ params }: PageProps) {
       {/* Article */}
 
       <article className="max-w-3xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: metadata.title,
+              description: metadata.description,
+              author: {
+                "@type": "Person",
+                name: metadata.author,
+              },
+              datePublished: metadata.date,
+              dateModified: metadata.date,
+              publisher: {
+                "@type": "Organization",
+                name: "Code with Ishant",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://codewithishant.vercel.app/logo.png",
+                },
+              },
+              url: `https://codewithishant.vercel.app/notes/${category}/${slug}`,
+              keywords: metadata.tags?.join(", "),
+              articleSection: category,
+              wordCount: readingTime.split(" ")[0],
+            }),
+          }}
+        />
         <Breadcrumbs
           category={category}
           title={metadata.title}
