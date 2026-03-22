@@ -1,11 +1,37 @@
-import { getAllPosts } from "@/lib/blog/getAllPosts";
+import { MetadataRoute } from 'next'
+import { getAllPosts } from '@/lib/blog/getAllPosts'
+import { getAllNotes } from '@/lib/notes/getAllNotes'
 
-export default function sitemap() {
-  const posts = getAllPosts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://codewithishant.vercel.app'
 
-  const urls = posts.map((post) => ({
-    url: `https://codewithishant.com/blog/${post.category}/${post.slug}`,
-  }));
+  const posts = await getAllPosts()
+  const notes = await getAllNotes()
 
-  return urls;
+  const blogUrls = posts.map(post => ({
+    url: `${baseUrl}/blog/${post.category}/${post.slug}`,
+    lastModified: new Date(),
+  }))
+
+  const notesUrls = notes.map(note => ({
+    url: `${baseUrl}/notes/${note.category}/${note.slug}`,
+    lastModified: new Date(),
+  }))
+
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/notes`,
+      lastModified: new Date(),
+    },
+    ...blogUrls,
+    ...notesUrls,
+  ]
 }
