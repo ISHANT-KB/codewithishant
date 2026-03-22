@@ -24,7 +24,7 @@ export default function RootLayout({
 }
 
 export const metadata = {
-  verfication:{
+  verification: {
     google: "NaE98muSCdUiKo_tzcULiC6sUowCSGgy4kSSMNB31mI",
-  }
+  },
 };
