@@ -29,7 +29,7 @@ export function getAllNotes(): Note[] {
 
       const source = fs.readFileSync(filePath, "utf8");
 
-      const { data } = matter(source);
+      const { data, content } = matter(source);
 
       notes.push({
         title: data.title,
@@ -37,6 +37,7 @@ export function getAllNotes(): Note[] {
         tags: data.tags ?? [],
         category,
         slug,
+        content,
       });
     });
   });

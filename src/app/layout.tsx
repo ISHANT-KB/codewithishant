@@ -11,11 +11,11 @@ export default function RootLayout({
   const posts = getAllPosts();
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Navbar />
 
-        <main className="max-w-7xl mx-auto p-5">{children}</main>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{children}</main>
 
         <CommandPalette posts={posts} />
       </body>

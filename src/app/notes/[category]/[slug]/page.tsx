@@ -60,7 +60,7 @@ export default async function NotePost({ params }: PageProps) {
 
   const { prev, next } = getAdjacentNotes(category, slug);
   return (
-    <div className="flex justify-between max-w-6xl mx-auto gap-10">
+    <div className="flex flex-col lg:flex-row justify-between max-w-6xl mx-auto gap-10 px-4 sm:px-6">
       {/* Article */}
 
       <article className="max-w-3xl">
@@ -142,7 +142,7 @@ export default async function NotePost({ params }: PageProps) {
       </article>
 
       {/* Table of Contents */}
-      <aside className="w-64 shrink-0">
+      <aside className="w-64 shrink-0 hidden lg:block">
         <TableOfContents headings={toc} />
         {/* Related Posts */}
         {related.length > 0 && (

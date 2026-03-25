@@ -9,7 +9,7 @@ export default function BlogLayout({
     <div className="flex max-w-7xl mx-auto">
       <Sidebar />
 
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 p-0 md:p-6">{children}</main>
     </div>
   );
 }

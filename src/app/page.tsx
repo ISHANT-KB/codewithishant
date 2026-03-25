@@ -14,7 +14,7 @@ export default function Home() {
   const popularTags = tags.slice(0, 10);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-10">
+    <div className="max-w-5xl mx-auto space-y-12 md:space-y-20 px-4 sm:px-6">
       {/* Hero Section */}
       <section className="text-center py-10">
         <h1 className="text-4xl font-bold mb-4">Welcome to CodeWithIshant</h1>
@@ -32,8 +32,8 @@ export default function Home() {
       {/* Featured Articles */}
       {featured.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold mb-4">Featured Articles</h2>
-          <div className="grid gap-4">
+          <h2 className="text-2xl font-bold mb-6">Featured Articles</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featured.map((post) => (
               <Link
                 key={post.slug}

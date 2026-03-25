@@ -28,7 +28,7 @@ export function getAllPosts(): Post[] {
 
       const source = fs.readFileSync(filePath, "utf8");
 
-      const { data } = matter(source);
+      const { data, content } = matter(source);
 
       posts.push({
         title: data.title,
@@ -39,6 +39,7 @@ export function getAllPosts(): Post[] {
         date: data.date ?? "",
         difficulty: data.difficulty ?? "",
         featured: data.featured ?? false,
+        content,
       });
     });
   });

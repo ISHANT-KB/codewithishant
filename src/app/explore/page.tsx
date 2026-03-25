@@ -13,7 +13,7 @@ export default function ExplorePage() {
   const popularTags = tags.slice(0, 10);
 
   return (
-    <div className="max-w-5xl mx-auto space-y-10">
+    <div className="max-w-5xl mx-auto space-y-12 md:space-y-16 px-4 sm:px-6">
       <h1 className="text-3xl font-bold">Explore Content</h1>
 
       <section>

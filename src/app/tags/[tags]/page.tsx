@@ -14,7 +14,7 @@ export default async function TagPage({ params }: PageProps) {
   const notes = getAllNotes().filter((note) => note.tags.includes(tag));
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6">
       <h1 className="text-3xl font-bold mb-6">Tag: {tag}</h1>
 
       <div className="space-y-6">

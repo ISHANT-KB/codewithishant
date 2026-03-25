@@ -5,7 +5,7 @@ export default function Sidebar() {
   const sidebar = getSidebar();
 
   return (
-    <aside className="w-50 border-r pr-4">
+    <aside className="w-50 border-r pr-4 hidden md:block">
       {sidebar.map((section) => (
         <div key={section.category} className="mb-6">
           <h3 className="font-bold capitalize mb-2">{section.category}</h3>

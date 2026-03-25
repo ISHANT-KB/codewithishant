@@ -9,6 +9,7 @@ export interface Post {
   featured?: boolean;
   series?: string;
   order?: number;
+  content?: string;
 }
 
 export interface Note {
@@ -19,6 +20,7 @@ export interface Note {
   slug: string;
   series?: string;
   order?: number;
+  content?: string;
 }
 
 export interface Tag {

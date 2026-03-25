@@ -60,7 +60,7 @@ export default async function BlogPost({ params }: PageProps) {
 
   const { prev, next } = getAdjacentPosts(category, slug);
   return (
-    <div className="flex justify-between max-w-6xl mx-auto gap-10">
+    <div className="flex flex-col lg:flex-row justify-between max-w-6xl mx-auto gap-10 px-4 sm:px-6">
       {/* Article */}
 
       <article className="max-w-3xl">

@@ -355,9 +355,17 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 860px) {
+  .hero, .section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
 @media (max-width: 600px) {
   .formGrid {
     grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
   .connectGrid {
     grid-template-columns: 1fr;
@@ -366,12 +374,18 @@
 
 @media (max-width: 480px) {
   .ctaInner {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.2rem;
+  }
+  .ctaHeading {
+    font-size: 1.8rem;
+  }
+  .heroTitle {
+    font-size: 2.4rem;
   }
   .hero {
-    padding: 3rem 1.2rem 2rem;
+    padding: 3.5rem 1.2rem 2rem;
   }
   .section {
-    padding: 3rem 1.2rem;
+    padding: 2.5rem 1.2rem;
   }
 }

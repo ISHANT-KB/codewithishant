@@ -1,14 +1,28 @@
-import { getAllPosts } from "@/lib/blog/getAllPosts";
+import fs from "fs";
+import path from "path";
 import Search from "@/components/features/search/Search";
 
+type SearchDocument = {
+  id: string;
+  title: string;
+  description?: string;
+  category: string;
+  tags: string[];
+  slug: string;
+  type: "blog" | "notes";
+  content: string;
+};
+
 export default function SearchPage() {
-  const posts = getAllPosts();
+  const indexPath = path.join(process.cwd(), "public", "search-index.json");
+  const raw = fs.readFileSync(indexPath, "utf-8");
+  const documents: SearchDocument[] = JSON.parse(raw);
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6">
       <h1 className="text-3xl font-bold mb-6">Search</h1>
 
-      <Search posts={posts} />
+      <Search documents={documents} />
     </div>
   );
 }
