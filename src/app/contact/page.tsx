@@ -61,7 +61,7 @@ export default function ContactPage() {
         <div className={styles.sectionLabel}>send a message</div>
         <div className={styles.formWrapper}>
           <form
-            action="https://formspree.io/f/your-form-id"
+            action="https://formspree.io/f/xvzvodlb"
             method="POST"
             className={styles.formGrid}
           >
