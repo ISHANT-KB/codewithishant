@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import Search from "@/components/features/search/Search";
+import InProgress from "@/components/workInProgress/inProgress";
 
 type SearchDocument = {
   id: string;
@@ -23,6 +24,7 @@ export default function SearchPage() {
       <h1 className="text-3xl font-bold mb-6">Search</h1>
 
       <Search documents={documents} />
+      <InProgress/>
     </div>
   );
 }
