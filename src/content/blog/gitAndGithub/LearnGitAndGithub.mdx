@@ -1,0 +1,296 @@
+---
+title: Learn Git and GitHub
+description: A complete beginner-friendly guide to mastering Git and GitHub for version control and collaboration
+date: 2026-03-14
+tags: [git, github, version-control]
+difficulty: beginner
+featured: true
+---
+
+# Learn Git and GitHub
+
+Git and GitHub are essential tools in modern software development. Whether you are building personal projects, freelancing, or working in teams, version control is a foundational skill.
+
+This guide will help you understand Git and GitHub from scratch and build a practical workflow you can use every day.
+
+---
+
+## What Is Git?
+
+Git is a distributed version control system (DVCS) that helps developers:
+
+- Track changes in source code
+- Maintain project history
+- Work on multiple features using branches
+- Collaborate without overwriting each other's work
+
+Unlike older systems, Git works locally on your machine, which makes it fast and reliable.
+
+---
+
+## What Is GitHub?
+
+GitHub is a cloud-based platform that hosts Git repositories and adds collaboration features such as:
+
+- Remote repository hosting
+- Pull requests
+- Issue tracking
+- Team collaboration
+- CI/CD integrations
+
+Think of Git as the version control tool and GitHub as the platform built around it.
+
+---
+
+## Installing Git
+
+Download Git from the official website:
+
+https://git-scm.com/
+
+### Verify installation
+
+```bash
+git --version
+```
+
+If Git is installed correctly, this command will print the installed version.
+
+## Initial Configuration
+
+After installing Git, configure your name and email:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+### Check configuration
+
+```bash
+git config --global --list
+```
+
+---
+
+## Getting Started with Git
+
+### Create a new repository
+
+```bash
+mkdir my-project
+cd my-project
+git init
+```
+
+### Clone an existing repository
+
+```bash
+git clone <repository-url>
+```
+
+### Check repository status
+
+```bash
+git status
+```
+
+---
+
+## Git Workflow
+
+Git works in three main stages:
+
+1. Working directory: where you edit files
+2. Staging area: where you prepare changes
+3. Repository: where commits are stored
+
+### Basic Git workflow
+
+1. Edit files in the working directory
+2. Stage changes with `git add`
+3. Commit changes with `git commit`
+4. Push commits to GitHub with `git push`
+
+### Basic Git commands
+
+- `git status`: Check repository status
+- `git init`: Initialize a new Git repository
+- `git add .`: Stage all changes
+- `git add <file>`: Stage a specific file
+- `git commit -m "message"`: Commit staged changes
+- `git push`: Push commits to a remote repository
+- `git pull`: Fetch and merge changes from a remote repository
+- `git branch`: List branches
+- `git checkout <branch>`: Switch branches
+- `git merge <branch>`: Merge a branch into the current branch
+- `git log`: View commit history
+
+---
+
+## Branching in Git
+
+Branches let you work on features or fixes without affecting the main codebase.
+
+### Create a new branch
+
+```bash
+git checkout -b feature-branch
+```
+
+### Switch to an existing branch
+
+```bash
+git checkout main
+```
+
+### Merge a branch
+
+```bash
+git checkout main
+git merge feature-branch
+```
+
+---
+
+## Collaborating with GitHub
+
+### Create a new repository on GitHub
+
+1. Go to https://github.com and sign in
+2. Click **New** to create a new repository
+3. Fill in the repository details
+4. Click **Create repository**
+
+### Push a local repository to GitHub
+
+```bash
+git remote add origin <repository-url>
+git push -u origin main
+```
+
+### Create a pull request
+
+1. Push your branch to GitHub
+2. Open the repository on GitHub
+3. Click **Compare & pull request**
+4. Add a title and description
+5. Click **Create pull request**
+
+### Review and merge pull requests
+
+1. Open the **Pull requests** tab
+2. Select a pull request
+3. Review the changes and leave comments if needed
+4. Click **Merge pull request** when it is ready
+
+---
+
+## Using GitHub with VS Code
+
+### Install the GitHub extension
+
+1. Open VS Code
+2. Open the Extensions view with `Ctrl+Shift+X`
+3. Search for `GitHub Pull Requests and Issues`
+4. Install the extension
+
+### Sign in to GitHub
+
+1. Open the Command Palette with `Ctrl+Shift+P`
+2. Run `GitHub: Sign in`
+3. Follow the prompts to authenticate
+
+### Clone a repository in VS Code
+
+1. Open the Command Palette with `Ctrl+Shift+P`
+2. Run `Git: Clone`
+3. Paste the repository URL
+
+### Create and manage branches
+
+1. Open the Source Control view with `Ctrl+Shift+G`
+2. Click the branch name in the status bar
+3. Create or switch branches
+
+### Add a remote repository
+
+```bash
+git remote add origin <repository-url>
+```
+
+### Push changes to GitHub
+
+```bash
+git push origin <branch-name>
+```
+
+---
+
+## Best Practices for Git and GitHub
+
+- Write clear and meaningful commit messages
+- Use separate branches for features and bug fixes
+- Pull the latest changes before starting work
+- Review code before merging pull requests
+- Use `.gitignore` to avoid committing unnecessary files
+- Keep repositories organized and documented
+
+---
+
+## Common Git Errors and Solutions
+
+### 1. Merge conflicts
+
+This happens when Git cannot automatically combine changes from two branches.
+
+How to fix it:
+
+1. Open the conflicted files
+2. Look for conflict markers such as `<<<<<<<`, `=======`, and `>>>>>>>`
+3. Edit the file to keep the correct version
+4. Save the file
+5. Stage the resolved file with `git add`
+6. Complete the merge with `git commit`
+
+### 2. Repository not found
+
+This usually means the remote URL is wrong or you do not have permission to access the repository.
+
+Check the remote URL:
+
+```bash
+git remote -v
+```
+
+Update it if needed:
+
+```bash
+git remote set-url origin <repository-url>
+```
+
+### 3. Changes not staged for commit
+
+This means you edited files but have not added them to the staging area yet.
+
+```bash
+git add .
+git commit -m "Add your message"
+```
+
+### 4. Rejected push
+
+This often happens when the remote branch has commits that your local branch does not have yet.
+
+```bash
+git pull origin main
+git push origin main
+```
+
+---
+
+## Final Thoughts
+
+Git helps you manage changes in your code, and GitHub helps you share and collaborate on those changes with others. Once you get comfortable with basic commands like `git init`, `git add`, `git commit`, `git pull`, and `git push`, you will be able to work much more confidently on real projects.
+
+Start small, practice regularly, and Git will quickly become one of the most useful tools in your workflow.

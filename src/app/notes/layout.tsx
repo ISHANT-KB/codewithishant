@@ -8,7 +8,7 @@ export default function NotesLayout({
 }) {
   return (
     <div className="flex max-w-7xl mx-auto">
-      <Sidebar />
+      <Sidebar pagename='notes'/>
       <InProgress/>
 
       <main className="flex-1 p-0 md:p-6">{children}</main>

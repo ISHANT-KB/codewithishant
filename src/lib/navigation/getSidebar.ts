@@ -1,8 +1,8 @@
 import fs from "fs";
 import path from "path";
 
-export function getSidebar() {
-  const blogDir = path.join(process.cwd(), "src/content/blog");
+export function getSidebar(pagename: string) {
+  const blogDir = path.join(process.cwd(), `src/content/${pagename}`);
 
   if (!fs.existsSync(blogDir)) {
     return [];

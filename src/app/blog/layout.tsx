@@ -1,5 +1,5 @@
 import Sidebar from "@/components/features/navigation/Sidebar";
-import InProgress from "@/components/workInProgress/inProgress";
+// import InProgress from "@/components/workInProgress/inProgress";
 
 export default function BlogLayout({
   children,
@@ -8,8 +8,8 @@ export default function BlogLayout({
 }) {
   return (
     <div className="flex max-w-7xl mx-auto">
-      <InProgress/>
-      <Sidebar />
+      {/* <InProgress/> */}
+      <Sidebar pagename="blog" />
 
       <main className="flex-1 p-0 md:p-6">{children}</main>
     </div>

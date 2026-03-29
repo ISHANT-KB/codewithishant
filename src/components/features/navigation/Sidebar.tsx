@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { getSidebar } from "@/lib/navigation/getSidebar";
 
-export default function Sidebar() {
-  const sidebar = getSidebar();
+export default function Sidebar(props: { pagename: string }) {
+  const sidebar = getSidebar(props.pagename);
+  const basePath = props.pagename === "notes" ? "/notes" : "/blog";
 
   return (
     <aside className="w-50 border-r pr-4 hidden md:block">
@@ -14,7 +15,7 @@ export default function Sidebar() {
             {section.posts.map((post) => (
               <li key={post.slug}>
                 <Link
-                  href={`/blog/${post.category}/${post.slug}`}
+                  href={`${basePath}/${post.category}/${post.slug}`}
                   className="text-blue-600"
                 >
                   {post.slug}

@@ -7,6 +7,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/features/navigation/Breadcrumbs";
 import { getAdjacentPosts } from "@/lib/blog/getAdjacentPosts";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: Promise<{
@@ -19,7 +20,13 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { category, slug } = await params;
-  const { metadata } = await getPost(category, slug);
+  const post = getPost(category, slug);
+
+  if (!post) {
+    return {};
+  }
+
+  const { metadata } = post;
 
   return {
     title: `${metadata.title} | Code with Ishant`,
@@ -54,7 +61,13 @@ export async function generateMetadata({
 export default async function BlogPost({ params }: PageProps) {
   const { category, slug } = await params;
 
-  const { metadata, content, toc, readingTime } = await getPost(category, slug);
+  const post = getPost(category, slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const { metadata, content, toc, readingTime } = post;
 
   const related = getRelatedPosts(metadata.tags ?? [], slug);
 

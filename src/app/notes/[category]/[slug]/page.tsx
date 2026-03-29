@@ -7,6 +7,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/features/navigation/Breadcrumbs";
 import { getAdjacentNotes } from "@/lib/notes/getAdjacentNotes";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: Promise<{
@@ -19,7 +20,13 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { category, slug } = await params;
-  const { metadata } = await getNote(category, slug);
+  const note = getNote(category, slug);
+
+  if (!note) {
+    return {};
+  }
+
+  const { metadata } = note;
 
   return {
     title: `${metadata.title} | Code with Ishant`,
@@ -54,7 +61,13 @@ export async function generateMetadata({
 export default async function NotePost({ params }: PageProps) {
   const { category, slug } = await params;
 
-  const { metadata, content, toc, readingTime } = await getNote(category, slug);
+  const note = getNote(category, slug);
+
+  if (!note) {
+    notFound();
+  }
+
+  const { metadata, content, toc, readingTime } = note;
 
   const related = getRelatedNotes(metadata.tags ?? [], slug);
 

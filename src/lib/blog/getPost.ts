@@ -12,6 +12,10 @@ export function getPost(category: string, slug: string) {
     slug + ".mdx",
   );
 
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
   const file = fs.readFileSync(filePath, "utf8");
 
   const { content, data } = matter(file);
