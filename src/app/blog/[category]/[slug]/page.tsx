@@ -1,6 +1,7 @@
 import { getPost } from "@/lib/blog/getPost";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/features/article/mdx-components";
+import { articleMdxOptions } from "@/components/features/article/mdx-options";
 import TableOfContents from "@/components/features/article/TableOfContents";
 import { getRelatedPosts } from "@/lib/blog/getRelatedPosts";
 import Link from "next/link";
@@ -116,7 +117,11 @@ export default async function BlogPost({ params }: PageProps) {
         })}{" "}
         • {readingTime} • {metadata.difficulty}
         <p className="text-gray-500 mt-2 mb-5">{metadata.description}</p>
-        <MDXRemote source={content} components={mdxComponents} />
+        <MDXRemote
+          source={content}
+          components={mdxComponents}
+          options={articleMdxOptions}
+        />
         {/* tags */}
         <div className="flex gap-2 mb-6 mt-12">
           {metadata.tags?.map((tag: string) => (
