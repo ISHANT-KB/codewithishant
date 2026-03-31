@@ -42,7 +42,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               {/* Icon when menu is closed */}

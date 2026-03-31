@@ -1,17 +1,52 @@
 ---
 title: C++ Loops
-description: Learn for loop and while loop in C++
+description: Learn how for loops and while loops work in C++.
 tags: [cpp, loops, basics]
 date: 2026-03-14
 difficulty: beginner
+author: Ishant
 ---
 
+Loops in C++ let you repeat a block of code efficiently.
 
+## The `for` loop
 
-Loops allow repeating operations.
+Use a `for` loop when you know how many times a task should repeat.
 
-## Example
+```cpp
+#include <iostream>
+using namespace std;
 
-```python
-for i in range(5):
-    print(i)
+int main() {
+    for (int i = 0; i < 5; i++) {
+        cout << i << endl;
+    }
+}
+```
+
+This prints the numbers `0` through `4`.
+
+## The `while` loop
+
+Use a `while` loop when repetition depends on a condition.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int count = 0;
+
+    while (count < 5) {
+        cout << count << endl;
+        count++;
+    }
+}
+```
+
+The loop continues as long as `count < 5` is true.
+
+## Quick rule
+
+- `for` is great for counted repetition.
+- `while` is better when a condition controls when the loop stops.

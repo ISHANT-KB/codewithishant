@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
 import { getTableOfContents } from "../content/getTableOfContents";
+import { normalizeContentMetadata } from "@/lib/content/metadata";
 
 export function getPost(category: string, slug: string) {
   const filePath = path.join(
@@ -19,6 +20,11 @@ export function getPost(category: string, slug: string) {
   const file = fs.readFileSync(filePath, "utf8");
 
   const { content, data } = matter(file);
+  const metadata = normalizeContentMetadata(data);
+
+  if (metadata.draft) {
+    return null;
+  }
 
   const toc = getTableOfContents(content);
 
@@ -26,7 +32,7 @@ export function getPost(category: string, slug: string) {
 
   return {
     content,
-    metadata: data,
+    metadata,
     toc,
     readingTime: stats.text,
   };

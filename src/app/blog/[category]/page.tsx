@@ -1,5 +1,6 @@
 import { getPostsByCategory } from "@/lib/blog/getPostsByCategory";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: Promise<{ category: string }>;
@@ -9,6 +10,10 @@ export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
 
   const posts = getPostsByCategory(category);
+
+  if (posts.length === 0) {
+    notFound();
+  }
 
   return (
     <div className="max-w-3xl mx-auto">

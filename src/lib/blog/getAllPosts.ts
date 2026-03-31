@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { Post } from "@/types/content";
+import { normalizeContentMetadata } from "../content/metadata";
 
 export function getAllPosts(): Post[] {
   const blogDir = path.join(process.cwd(), "src/content/blog");
@@ -19,7 +20,7 @@ export function getAllPosts(): Post[] {
   categories.forEach((category) => {
     const categoryPath = path.join(blogDir, category);
 
-    const files = fs.readdirSync(categoryPath);
+    const files = fs.readdirSync(categoryPath).filter((file) => file.endsWith(".mdx"));
 
     files.forEach((file) => {
       const slug = file.replace(".mdx", "");
@@ -29,23 +30,37 @@ export function getAllPosts(): Post[] {
       const source = fs.readFileSync(filePath, "utf8");
 
       const { data, content } = matter(source);
+      const metadata = normalizeContentMetadata(data);
+
+      if (metadata.draft) {
+        return;
+      }
 
       posts.push({
-        title: data.title,
-        description: data.description,
-        tags: data.tags ?? [],
+        title: metadata.title,
+        description: metadata.description,
+        tags: metadata.tags,
         category,
         slug,
-        date: data.date ?? "",
-        difficulty: data.difficulty ?? "",
-        featured: data.featured ?? false,
+        date: metadata.date,
+        difficulty: metadata.difficulty,
+        author: metadata.author,
+        featured: metadata.featured,
+        draft: metadata.draft,
+        series: metadata.series,
+        order: metadata.order,
         content,
       });
     });
   });
 
   // sort newest first
-  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  posts.sort((a, b) => {
+    const aTime = a.date ? new Date(a.date).getTime() : 0;
+    const bTime = b.date ? new Date(b.date).getTime() : 0;
+
+    return bTime - aTime;
+  });
 
   return posts;
 }

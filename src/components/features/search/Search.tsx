@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Fuse from "fuse.js";
 import Link from "next/link";
 
@@ -17,6 +17,7 @@ type SearchDocument = {
 
 type SearchProps = {
   documents: SearchDocument[];
+  initialQuery?: string;
 };
 
 const fuseOptions = {
@@ -30,8 +31,15 @@ const fuseOptions = {
   threshold: 0.3,
 };
 
-export default function Search({ documents }: SearchProps) {
-  const [query, setQuery] = useState("");
+export default function Search({
+  documents,
+  initialQuery = "",
+}: SearchProps) {
+  const [query, setQuery] = useState(initialQuery);
+
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
 
   const fuse = new Fuse(documents, fuseOptions);
   const results = query ? fuse.search(query).map((r) => r.item) : [];

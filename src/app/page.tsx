@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Explore programming tutorials, quick notes, and tech insights.",
     url: "https://codewithishant.vercel.app",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.svg"],
   },
 };
 
@@ -330,7 +330,7 @@ export default function Home() {
               {popularTags.map((tag) => (
                 <li key={tag.name}>
                   <Link
-                    href={`/tags/${tag.name}`}
+                    href={`/tags/${encodeURIComponent(tag.name)}`}
                     className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     rel="tag"
                     aria-label={`Browse ${tag.count} ${tag.name} posts`}

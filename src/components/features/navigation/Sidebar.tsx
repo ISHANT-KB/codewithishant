@@ -16,9 +16,9 @@ export default function Sidebar(props: { pagename: string }) {
               <li key={post.slug}>
                 <Link
                   href={`${basePath}/${post.category}/${post.slug}`}
-                  className="text-blue-600"
+                  className="text-blue-600 hover:underline"
                 >
-                  {post.slug}
+                  {post.title}
                 </Link>
               </li>
             ))}

@@ -14,16 +14,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogUrls = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.category}/${post.slug}`,
-    lastModified: new Date(post.date),
+    lastModified: post.date ? new Date(post.date) : new Date(),
   }));
 
   const notesUrls = notes.map((note) => ({
     url: `${baseUrl}/notes/${note.category}/${note.slug}`,
-    lastModified: new Date(),
+    lastModified: note.date ? new Date(note.date) : new Date(),
   }));
 
   const tagUrls = tags.map((tag) => ({
-    url: `${baseUrl}/tags/${tag.name}`,
+    url: `${baseUrl}/tags/${encodeURIComponent(tag.name)}`,
     lastModified: new Date(),
   }));
 

@@ -1,7 +1,7 @@
-import { getAllTags } from "@/lib/content/getAllTags";
 import { getAllPosts } from "@/lib/blog/getAllPosts";
 import { getAllNotes } from "@/lib/notes/getAllNotes";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: Promise<{ tags: string }>;
@@ -12,6 +12,10 @@ export default async function TagPage({ params }: PageProps) {
 
   const posts = getAllPosts().filter((post) => post.tags.includes(tag));
   const notes = getAllNotes().filter((note) => note.tags.includes(tag));
+
+  if (posts.length === 0 && notes.length === 0) {
+    notFound();
+  }
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6">

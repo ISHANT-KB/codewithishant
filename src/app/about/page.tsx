@@ -22,11 +22,11 @@ const topics = [
 ];
 
 const contentTypes = [
-  { title: "Tutorials",     desc: "Step-by-step guides from absolute zero to confident understanding. Written to be honest about the hard parts.", glyph: "01" },
-  { title: "Notes",         desc: "Condensed study notes that cut the fluff. Think of them as the cheat-sheets I wish I had in class.", glyph: "02" },
-  { title: "Blog",          desc: 'Deeper dives, opinion pieces, and "aha moment" write-ups on things I found worth exploring.', glyph: "03" },
-  { title: "Code Snippets", desc: "Reusable, copy-paste-ready patterns for common problems. No bloated boilerplate.", glyph: "04" },
-  { title: "Projects",      desc: "Full project walkthroughs that show how the small pieces connect into something real.", glyph: "05" },
+  { title: "Blog Posts", desc: "Longer explainers, walkthroughs, and practical beginner-friendly articles on programming topics.", glyph: "01" },
+  { title: "Notes", desc: "Shorter study notes that keep the important ideas visible when you need a quick refresher.", glyph: "02" },
+  { title: "Searchable Topics", desc: "Tags, categories, breadcrumbs, and search make it easier to jump straight to what you need.", glyph: "03" },
+  { title: "Living Content", desc: "Articles can evolve over time as I understand the topic better and find clearer ways to explain it.", glyph: "04" },
+  { title: "More Coming", desc: "The platform is still growing, so new sections and deeper topic coverage will keep getting added.", glyph: "05" },
 ];
 
 const philosophy = [

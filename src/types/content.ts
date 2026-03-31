@@ -4,9 +4,11 @@ export interface Post {
   tags: string[];
   category: string;
   slug: string;
-  date: string;
-  difficulty: string;
+  date?: string;
+  difficulty?: string;
+  author?: string;
   featured?: boolean;
+  draft?: boolean;
   series?: string;
   order?: number;
   content?: string;
@@ -18,6 +20,11 @@ export interface Note {
   tags: string[];
   category: string;
   slug: string;
+  date?: string;
+  difficulty?: string;
+  author?: string;
+  featured?: boolean;
+  draft?: boolean;
   series?: string;
   order?: number;
   content?: string;

@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { Tag } from "@/types/content";
+import { normalizeContentMetadata } from "@/lib/content/metadata";
 
 export function getAllTags(): Tag[] {
   const blogDir = path.join(process.cwd(), "src/content/blog");
@@ -15,14 +16,17 @@ export function getAllTags(): Tag[] {
     .filter((entry) => fs.statSync(path.join(blogDir, entry)).isDirectory());
   blogCategories.forEach((category) => {
     const categoryPath = path.join(blogDir, category);
-    const files = fs.readdirSync(categoryPath);
+    const files = fs
+      .readdirSync(categoryPath)
+      .filter((file) => file.endsWith(".mdx"));
     files.forEach((file) => {
       const filePath = path.join(categoryPath, file);
       const source = fs.readFileSync(filePath, "utf8");
       const { data } = matter(source);
+      const metadata = normalizeContentMetadata(data);
       const slug = file.replace(".mdx", "");
-      if (data.tags) {
-        data.tags.forEach((tag: string) => {
+      if (!metadata.draft) {
+        metadata.tags.forEach((tag) => {
           if (!tags[tag]) tags[tag] = [];
           tags[tag].push(`${category}/${slug}`);
         });
@@ -37,14 +41,17 @@ export function getAllTags(): Tag[] {
       .filter((entry) => fs.statSync(path.join(notesDir, entry)).isDirectory());
     notesCategories.forEach((category) => {
       const categoryPath = path.join(notesDir, category);
-      const files = fs.readdirSync(categoryPath);
+      const files = fs
+        .readdirSync(categoryPath)
+        .filter((file) => file.endsWith(".mdx"));
       files.forEach((file) => {
         const filePath = path.join(categoryPath, file);
         const source = fs.readFileSync(filePath, "utf8");
         const { data } = matter(source);
+        const metadata = normalizeContentMetadata(data);
         const slug = file.replace(".mdx", "");
-        if (data.tags) {
-          data.tags.forEach((tag: string) => {
+        if (!metadata.draft) {
+          metadata.tags.forEach((tag) => {
             if (!tags[tag]) tags[tag] = [];
             tags[tag].push(`${category}/${slug}`);
           });

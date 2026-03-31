@@ -1,7 +1,43 @@
 ---
 title: Python OOPs
-description: Learn about Object-Oriented Programming in Python
+description: Learn the basics of Object-Oriented Programming in Python.
 tags: [python, oops, basics]
 date: 2026-03-14
 difficulty: beginner
+author: Ishant
 ---
+
+Object-Oriented Programming, or OOP, is a way of organizing code using classes and objects.
+
+## What is a class
+
+A class is a blueprint.
+
+It defines what data an object should store and what actions it can perform.
+
+```python
+class Student:
+    def __init__(self, name):
+        self.name = name
+```
+
+## What is an object
+
+An object is an instance of a class.
+
+```python
+student = Student("Ishant")
+print(student.name)
+```
+
+Here, `student` is an object created from the `Student` class.
+
+## Why OOP is useful
+
+- It groups related data and behavior together.
+- It makes large programs easier to organize.
+- It helps you reuse code through classes and methods.
+
+## Final thought
+
+Start by understanding classes, objects, and constructors. Once those feel natural, concepts like inheritance and polymorphism become much easier to learn.

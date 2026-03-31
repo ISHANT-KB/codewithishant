@@ -54,7 +54,7 @@ export default function ExplorePage() {
           {popularTags.map((tag) => (
             <Link
               key={tag.name}
-              href={`/tags/${tag.name}`}
+              href={`/tags/${encodeURIComponent(tag.name)}`}
               className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200"
             >
               {tag.name} ({tag.count})
