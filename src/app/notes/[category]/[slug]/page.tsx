@@ -47,7 +47,7 @@ export async function generateMetadata({
       tags: metadata.tags,
       images: [
         {
-          url: "https://codewithishant.vercel.app/og-image.svg",
+          url: "/og-image.svg",
           width: 1200,
           height: 630,
           alt: metadata.title,
@@ -58,7 +58,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: metadata.title,
       description: metadata.description,
-      images: ["https://codewithishant.vercel.app/og-image.svg"],
+      images: ["/og-image.svg"],
     },
   };
 }
@@ -103,7 +103,7 @@ export default async function NotePost({ params }: PageProps) {
                 name: "Code with Ishant",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://codewithishant.vercel.app/logo.svg",
+                  url: "/logo.svg",
                 },
               },
               url: `https://codewithishant.vercel.app/notes/${category}/${slug}`,

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bubble Sort Visualizer</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    #array {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 300px;
+      margin: 30px auto;
+      width: 80%;
+      gap: 4px;
+    }
+
+    .bar {
+      width: 30px;
+      background: #3b82f6;
+      transition: height 0.3s ease, background 0.2s;
+    }
+
+    .active {
+      background: #f59e0b;
+    }
+
+    .swap {
+      background: #ef4444;
+    }
+
+    .sorted {
+      background: #22c55e;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Bubble Sort Visualizer</h1>
+
+<div>
+  <button onclick="generateArray()">Generate New Array</button>
+  <button onclick="bubbleSort()">Start Sorting</button>
+</div>
+
+<div id="array"></div>
+
+<script>
+  const container = document.getElementById("array");
+  let values = [];
+
+  function generateArray(size = 20) {
+    container.innerHTML = "";
+    values = [];
+
+    for (let i = 0; i < size; i++) {
+      let value = Math.floor(Math.random() * 250) + 20;
+      values.push(value);
+
+      const bar = document.createElement("div");
+      bar.classList.add("bar");
+      bar.style.height = value + "px";
+
+      container.appendChild(bar);
+    }
+  }
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function bubbleSort() {
+    const bars = document.querySelectorAll(".bar");
+
+    for (let i = 0; i < values.length; i++) {
+      for (let j = 0; j < values.length - i - 1; j++) {
+
+        bars[j].classList.add("active");
+        bars[j + 1].classList.add("active");
+
+        await sleep(50);
+
+        if (values[j] > values[j + 1]) {
+          // swap values
+          let temp = values[j];
+          values[j] = values[j + 1];
+          values[j + 1] = temp;
+
+          // update heights
+          bars[j].style.height = values[j] + "px";
+          bars[j + 1].style.height = values[j + 1] + "px";
+
+          bars[j].classList.add("swap");
+          bars[j + 1].classList.add("swap");
+
+          await sleep(50);
+
+          bars[j].classList.remove("swap");
+          bars[j + 1].classList.remove("swap");
+        }
+
+        bars[j].classList.remove("active");
+        bars[j + 1].classList.remove("active");
+      }
+
+      bars[values.length - i - 1].classList.add("sorted");
+    }
+  }
+
+  // Initial array
+  generateArray();
+</script>
+
+</body>
+</html>
